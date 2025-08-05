@@ -18,7 +18,7 @@
       <p>Authors born after 1850:</p>
 
       <ul>
-        <li v-for="author in modernAuthors" :key="author.id"> 
+        <li v-for="author in modernAuthors" :key="author.id" :class="highlight"> 
           {{ author.name }} ({{ author.birthYear }})
         </li>
       </ul>
@@ -92,6 +92,17 @@
     <section class="lab-section">
       <h2>Attribute, Class and Style Binding with <code>v-bind</code></h2>
       <p>Highlighting Specific Authors:</p>
+      <ul>
+        <li
+          v-for="author in authors"
+          :key="author.id"
+          :class="{ highlight: author.name === 'George Orwell' }"
+          :style="author.name === 'George Orwell' ? { color: 'white', fontWeight: 'bold' } : {}"
+        >
+          {{ author.name }} ({{ author.birthYear }})
+        </li>
+      </ul>
+
 
     </section>
   </div>
@@ -121,8 +132,9 @@ const allFamousWorks = computed(() => {
 
 // Activity 4: Find author by name
 const orwell = computed(() => {
-  // TODO: CODE TO FIND AUTHOR BY NAME HERE
+  return authors.find(author => author.name === "George Orwell")
 })
+
 
 // Activity 5: Find author by ID
 const austen = computed(() => {
